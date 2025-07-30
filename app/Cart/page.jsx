@@ -1,12 +1,29 @@
+'use client'
 import React from "react";
+import {  useDispatch, useSelector } from "react-redux";
+import { deleteProduct,clearCart } from "../store/cartSlice";
+
 
 const page = () => {
+  const dispatch = useDispatch() 
+
+  const cartProducts = useSelector((state)=>{
+   return state.cartProducts
+  })
+  const totalPrice = () => {
+    const total = cartProducts?.reduce((acc, ele) => acc + ele.price * (ele.quantity || 1), 0);
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(total);
+  };
+  
   return (
     <div>
-      <section className="cart-page px-4 py-8 md:px-8 lg:px-16 bg-gray-50 min-h-screen">
+      <section className="cart-page px-4 py-8 md:px-8 lg:px-16 bg-gray-50 ">
         <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto">
           {/* Cart Items */}
-          <div className="flex-1 bg-white rounded-xl shadow-sm p-4 sm:p-6">
+          <div className="flex-1 bg-white max-h-screen overflow-auto  rounded-xl shadow-sm p-4 sm:p-6">
             <h2 className="text-2xl font-semibold mb-4">Cart</h2>
 
             {/* Table Headers */}
@@ -17,35 +34,10 @@ const page = () => {
             </div>
 
             {/* Cart Items */}
-            {[
-              {
-                title: "Lorem ipsum dolor sit amet",
-                color: "Black",
-                size: "M",
-                price: 89.99,
-                quantity: 1,
-                image: "/p1.webp",
-              },
-              {
-                title: "Consectetur adipiscing elit",
-                color: "White",
-                size: "L",
-                price: 64.99,
-                quantity: 2,
-                image: "/p1.webp",
-              },
-              {
-                title: "Sed do eiusmod tempor",
-                color: "Blue",
-                size: "S",
-                price: 49.99,
-                quantity: 1,
-                image: "/p1.webp",
-              },
-            ].map((item, idx) => (
+            {cartProducts?.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col sm:flex-row items-center gap-4 py-4 border-b"
+                className="  flex flex-col sm:flex-row items-center gap-4 py-4 border-b"
               >
                 <img
                   src={item.image}
@@ -58,7 +50,10 @@ const page = () => {
                     <span>Color: {item.color}</span>
                     <span>Size: {item.size}</span>
                   </div>
-                  <button className="text-red-500 text-sm mt-1">
+                  <button onClick={()=>{
+                  dispatch(deleteProduct(item.id))
+                  }} 
+                  className="text-red-500 text-sm mt-1 cursor-pointer hover:text-red-600  ">
                     🗑 Remove
                   </button>
                 </div>
@@ -80,13 +75,17 @@ const page = () => {
                 placeholder="Coupon code"
                 className="border rounded-full px-4 py-2 w-full md:w-auto flex-1"
               />
-              <button className="bg-blue-600 text-white rounded-full px-6 py-2 w-full md:w-auto">
+              <button className="cursor-pointer hover:bg-blue-700 duration-300 transition bg-blue-600 text-white rounded-full px-6 py-2 w-full md:w-auto">
                 Apply
               </button>
-              <button className="border border-blue-600 text-blue-600 rounded-full px-6 py-2 w-full md:w-auto">
+              <button className="cursor-pointer hover:bg-blue-600 hover:text-white duration-300 transition border border-blue-600 text-blue-600 rounded-full px-6 py-2 w-full md:w-auto">
                 Update
               </button>
-              <button className="border border-red-500 text-red-500 rounded-full px-6 py-2 w-full md:w-auto">
+              <button
+              onClick={()=>{
+                dispatch(clearCart())
+              }}
+              className=" cursor-pointer hover:bg-red-500 hover:text-white duration-300 transition border border-red-500 text-red-500 rounded-full px-6 py-2 w-full md:w-auto">
                 Clear
               </button>
             </div>
@@ -129,7 +128,7 @@ const page = () => {
             <div className="border-t mt-4 pt-4">
               <div className="flex justify-between text-lg font-bold">
                 <span>Total</span>
-                <span>$301.95</span>
+                <span>{totalPrice()}</span>
               </div>
             </div>
 

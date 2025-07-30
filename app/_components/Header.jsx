@@ -9,10 +9,15 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [HiddenTopHeader, setHiddenTopheader] = useState(false);
   const [openMenue, setOpenMenue] = useState(false);
+
+  const cartProducts = useSelector((state)=>{
+  return  state.cartProducts
+  })
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 100) {
@@ -79,8 +84,8 @@ const Header = () => {
       </div>
 
       {/* Placeholder for medium and end headers */}
-      <div className="medHeader ">
-        <div className="bg-white  medHeaderCon text-center container max-[700px]:px-10  xl:px-25 m-auto topHeaderCon text-sm  py-6 w-full flex justify-between items-center ">
+      <div className="medHeader bg-white">
+        <div className="  medHeaderCon text-center container max-[700px]:px-10  xl:px-25 m-auto topHeaderCon text-sm  py-6 w-full flex justify-between items-center ">
           {/* Logo */}
           <div className="logo text-3xl font-bold text-sec">eStore</div>
 
@@ -106,12 +111,14 @@ const Header = () => {
                 0
               </span>
             </div>
-            <div className="relative cursor-pointer md:text-[35px] text-[20px] ">
+          <Link href={'/Cart'}>
+          <div className="relative cursor-pointer md:text-[35px] text-[20px] ">
               <ShoppingCartOutlinedIcon className="text-sec" />
               <span className="absolute -top-1 -right-2 bg-main text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
-                3
+               {cartProducts?.length ?? 0}
               </span>
             </div>
+          </Link>  
             <div
               className=" xl:hidden block relative cursor-pointer md:text-[35px] text-[20px] "
               onClick={() => {
