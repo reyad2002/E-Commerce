@@ -1,38 +1,36 @@
 @import "tailwindcss";
 
-
 @theme {
-  --color-main: #0A4DB8 ;
-  --color-sec: #2D465E ;
-  --color-bwhite: #F3F6FB ;
-
+  --color-main: #0a4db8;
+  --color-sec: #2d465e;
+  --color-bwhite: #f3f6fb;
 }
 @font-face {
   font-family: nunito;
-  src: url('/Nunito-Regular.ttf');
+  src: url("/Nunito-Regular.ttf");
 }
 @font-face {
   font-family: nunito;
-  src: url('/Nunito-bold.ttf');
+  src: url("/Nunito-bold.ttf");
   font-weight: 500;
 }
-*{
+* {
   font-family: nunito;
 }
 
 .loader {
   width: 40px;
   aspect-ratio: 1.154;
-  --_g: no-repeat radial-gradient(farthest-side,#0033be 90%,#001fba00);
-  background: 
-    var(--_g) 50%  0,
-    var(--_g) 0    100%,
-    var(--_g) 100% 100%;
-  background-size: 35% calc(35%*1.154);
+  --_g: no-repeat radial-gradient(farthest-side, #0033be 90%, #001fba00);
+  background: var(--_g) 50% 0, var(--_g) 0 100%, var(--_g) 100% 100%;
+  background-size: 35% calc(35% * 1.154);
   animation: l16 1s infinite;
 }
-@keyframes l16{ 
-    50%,100% {background-position: 100% 100%,50% 0,0 100%} 
+@keyframes l16 {
+  50%,
+  100% {
+    background-position: 100% 100%, 50% 0, 0 100%;
+  }
 }
 
 /* .slick-prev::before,
@@ -45,4 +43,28 @@
 .slick-prev:hover::before,
 .slick-next:hover::before {
   color: #909090;
+} */
+.Hero {
+  background-color: #0a0a0a;
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #049bff 35%,
+    #002660 75%,
+    #0a0a0a 100%
+  );
+  background-size: 200% 200%;
+  animation: deepOcean 18s ease infinite;
+}
+
+/* @keyframes gradientPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 } */

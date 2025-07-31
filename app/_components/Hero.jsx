@@ -2,7 +2,7 @@ import { FaTruck, FaShieldAlt, FaSyncAlt } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col min-[1100px]:flex-row items-center justify-between p-8 lg:p-25 bg-white ">
+    <section className="Hero flex flex-col min-[1100px]:flex-row items-center justify-between p-8 lg:p-25 ">
       {/* Left Text Content */}
       <div className="max-w-xl space-y-6">
         <span className="bg-blue-100 text-main px-4 py-1 rounded-full text-sm font-semibold">
@@ -13,7 +13,7 @@ const Hero = () => {
           <span className="text-main underline underline-offset-4">Fashion</span>{" "}
           For Every Season
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-900 text-lg">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus
           nec ullamcorper mattis, pulvinar dapibus leo. Vestibulum ante ipsum primis in
           faucibus.
@@ -27,13 +27,13 @@ const Hero = () => {
           </button>
         </div>
         <div className="flex items-center gap-8 pt-6">
-          <div className="flex items-center gap-2 text-sm text-gray-700">
+          <div className="flex items-center gap-2 text-sm text-gray-100">
             <FaTruck className="text-main" /> Free Shipping
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-700">
+          <div className="flex items-center gap-2 text-sm text-gray-100">
             <FaShieldAlt className="text-main" /> Secure Payment
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-700">
+          <div className="flex items-center gap-2 text-sm text-gray-100">
             <FaSyncAlt className="text-main" /> Easy Returns
           </div>
         </div>
