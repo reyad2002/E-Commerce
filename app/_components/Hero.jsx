@@ -2,7 +2,7 @@ import { FaTruck, FaShieldAlt, FaSyncAlt } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <section className="Hero flex flex-col min-[1100px]:flex-row items-center justify-between p-8 lg:p-25 ">
+    <section className="Hero flex flex-col min-[1100px]:flex-row items-center justify-between mb-15 p-8 lg:pt-10 lg:px-25 ">
       {/* Left Text Content */}
       <div className="max-w-xl space-y-6">
         <span className="bg-blue-100 text-main px-4 py-1 rounded-full text-sm font-semibold">
