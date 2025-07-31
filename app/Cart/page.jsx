@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import {  useDispatch, useSelector } from "react-redux";
-import { deleteProduct,clearCart } from "../store/cartSlice";
+import { deleteProduct,clearCart, increaseQuantity , decreaseQuantity } from "../store/cartSlice";
 
 
 const page = () => {
@@ -61,9 +61,13 @@ const page = () => {
                   ${item.price.toFixed(2)}
                 </div>
                 <div className="flex items-center justify-center sm:justify-end gap-2 w-full sm:w-auto">
-                  <button className="w-8 h-8 rounded-full border">-</button>
+                  <button
+                 onClick={() => dispatch(decreaseQuantity(item.id))}
+                  className="w-8 h-8 rounded-full border cursor-pointer hover:bg-[#e2e2e2] transition-all duration-300 ">-</button>
                   <span>{item.quantity}</span>
-                  <button className="w-8 h-8 rounded-full border">+</button>
+                  <button
+                   onClick={() => dispatch(increaseQuantity(item.id))}
+                  className="w-8 h-8 rounded-full border cursor-pointer hover:bg-[#e2e2e2] transition-all duration-300 ">+</button>
                 </div>
               </div>
             ))}

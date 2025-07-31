@@ -4,46 +4,9 @@ import { FaStar, FaStarHalfAlt, FaRegStar, FaLock } from "react-icons/fa";
 import { FiEye, FiHeart } from "react-icons/fi";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 
-const products = [
-  {
-    image: "/p1.webp",
-    title: "Lorem ipsum dolor sit amet",
-    price: 89.99,
-    rating: 4.5,
-    reviews: 42,
-    badge: "New",
-    available: true,
-  },
-  {
-    image: "/p1.webp",
-    title: "Consectetur adipiscing elit",
-    price: 64.99,
-    oldPrice: 79.99,
-    rating: 4,
-    reviews: 28,
-    badge: "Sale",
-    available: true,
-  },
-  {
-    image: "/p1.webp",
-    title: "Sed do eiusmod tempor ",
-    price: 119.0,
-    rating: 5,
-    reviews: 56,
-    available: true,
-    showActions: true,
-  },
-  {
-    image: "/p1.webp",
-    title: "Ut labore et dolore magna ",
-    price: 75.5,
-    rating: 3,
-    reviews: 15,
-    badge: "Sold Out",
-    available: false,
-  },
-];
 
 const renderStars = (rating) => {
   const full = Math.floor(rating);
@@ -63,6 +26,9 @@ const renderStars = (rating) => {
 };
 
 const BestSellers = () => {
+  const dispatch = useDispatch();
+
+  const bestSellersProducts = useSelector((state)=> state.BestSellers)
   return (
     <section className="py-12 bg-white text-center">
       <h2 className="text-3xl font-bold text-sec">Best Sellers</h2>
@@ -72,7 +38,7 @@ const BestSellers = () => {
       </p>
 
       <div className="flex flex-wrap justify-center gap-6 px-4 overflow-hidden py-6">
-        {products.map((product, index) => (
+        {bestSellersProducts.map((product, index) => (
           <div
             key={index}
             className=" group overflow-hidden hover:translate-y-[-10px] relative w-full sm:w-75 bg-white rounded-xl shadow-lg py-6 px-4 hover:shadow-xl transition"
@@ -163,6 +129,13 @@ const BestSellers = () => {
             </div>
 
             <button
+              onClick={() => 
+                {
+                  dispatch(addToCart(product))
+                  // console.log(element)
+                }
+      
+                }
               disabled={!product.available}
               className={`w-full py-2 text-white rounded-sm font-medium flex items-center justify-center gap-2 ${
                 product.available

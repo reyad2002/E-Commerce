@@ -100,9 +100,8 @@ const Page = () => {
           onClick={() => 
           {
             dispatch(addToCart(element))
-            console.log(element)
+            // console.log(element)
           }
-
 
           }
           className={`w-full py-2 text-white rounded-sm font-medium flex items-center justify-center gap-2 hover:bg-blue-800 ${"bg-main text-gray-500 cursor-pointer"}`}
