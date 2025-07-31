@@ -5,6 +5,8 @@ import { FaStar, FaStarHalfAlt, FaRegStar, FaLock } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 
 const categories = ["All", "Clothing", "Accessories", "Electronics"];
 
@@ -19,7 +21,7 @@ const categories = ["All", "Clothing", "Accessories", "Electronics"];
 //     category: "Clothing",
 //     badge: "Sale",
 //   },
-  
+
 //   {
 //     image: "/p1.webp",
 //     title: "Consectetur adipiscing elit",
@@ -83,7 +85,7 @@ const categories = ["All", "Clothing", "Accessories", "Electronics"];
 //     reviews: 32,
 //     category: "Electronics",
 //   },
-  
+
 // ];
 
 const renderStars = (rating) => {
@@ -103,7 +105,7 @@ const renderStars = (rating) => {
 const ProductFilterSection = () => {
   const dispatch = useDispatch();
 
-  const filterProduct = useSelector((state)=> state.filterProducts)
+  const filterProduct = useSelector((state) => state.filterProducts);
   const [selectedCategory, setSelectedCategory] = useState("All");
   // present the category name
   const categoryName = () => {
@@ -132,8 +134,42 @@ const ProductFilterSection = () => {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.3 }}
-        className="relative bg-white rounded-xl shadow hover:shadow-md transition p-4"
+        className=" group overflow-hidden relative bg-white rounded-xl shadow hover:shadow-md transition p-4"
       >
+        <div className="flex flex-col gap-3 p-4 absolute top-3 right-[-65px] group-hover:right-0 z-10 transition-all duration-300">
+          <FavoriteBorderOutlinedIcon
+            sx={{
+              backgroundColor: "#ffffff",
+              color: "#2D465E",
+              border: "1px solid #2D465E",
+              cursor: "pointer",
+              fontSize: "30px",
+              padding: "5px",
+              borderRadius: "50%",
+              transition: "all 0.3s ease",
+              ":hover": {
+                backgroundColor: "#0A4DB8",
+                color: "#ffffff",
+              },
+            }}
+          />
+          <RemoveRedEyeOutlinedIcon
+            sx={{
+              backgroundColor: "#ffffff",
+              color: "#2D465E",
+              border: "1px solid #2D465E",
+              cursor: "pointer",
+              fontSize: "30px",
+              padding: "5px",
+              borderRadius: "50%",
+              transition: "all 0.3s ease",
+              ":hover": {
+                backgroundColor: "#0A4DB8",
+                color: "#ffffff",
+              },
+            }}
+          />
+        </div>
         {element.badge && (
           <span
             className={`absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full ${
@@ -168,34 +204,26 @@ const ProductFilterSection = () => {
           <span>({element.reviews})</span>
         </div>
         <button
-              onClick={() => 
-                {
-                  dispatch(addToCart(element))
-                  // console.log(element)
-                }
-      
-                }
-              // disabled={!element.available}
-              className={`w-full py-2 text-white rounded-sm font-medium flex items-center justify-center gap-2 ${
-                 "bg-main hover:bg-main cursor-pointer"
-                 
-              }`}
-            >
-              <FaLock />
-              Add to Cart
-            </button>
+          onClick={() => {
+            dispatch(addToCart(element));
+            // console.log(element)
+          }}
+          // disabled={!element.available}
+          className={`w-full py-2 text-white rounded-sm font-medium flex items-center justify-center gap-2 ${"bg-main hover:bg-main cursor-pointer"}`}
+        >
+          <FaLock />
+          Add to Cart
+        </button>
       </motion.div>
     ));
   };
   // filter products
   const filterProducts = () => {
-
     return selectedCategory === "All"
       ? filterProduct
       : filterProduct.filter((p) => p.category === selectedCategory);
   };
 
-  
   return (
     <section className=" py-10 px-6 ">
       {/* Category Name */}
